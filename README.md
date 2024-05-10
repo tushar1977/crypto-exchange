@@ -7,3 +7,10 @@ testnet :- currently in developemt
 mainnet :- soon in development after testnet
 
 In testnet , Users from around the globe can trade crypto in open market where price would of crypto would be adjusted by the trades
+
+
+To run in localhost
+
+export FLASK_APP = server
+export FLASK_DEBUG=1
+flask run
