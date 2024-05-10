@@ -11,6 +11,6 @@ In testnet , Users from around the globe can trade crypto in open market where p
 
 To run in localhost
 
-export FLASK_APP = server
-export FLASK_DEBUG=1
+export FLASK_APP=server \n
+export FLASK_DEBUG=1 \n
 flask run
