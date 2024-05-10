@@ -1,0 +1,32 @@
+{% if current_user.is_authenticated %}{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Stocks</title>
+</head>
+<body>
+    <h1>User Stocks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(stocks|length) %}
+            <tr>
+                <td>{{ stocks[i] }}</td>
+                <td>{{ quantities[i] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}{% endif %}
