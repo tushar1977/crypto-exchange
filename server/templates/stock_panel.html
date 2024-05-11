@@ -64,11 +64,12 @@
       <div class="card">
         <form action="/stock" method="post">
           <h3 name="stock_name">AAPL</h3>
-          <p name="price">Price: 3000</p>
+          <p name="price" id="price-display">Price: {{ price }}</p>
           <label for="quantity">Quantity:</label>
           <input type="number" id="quantity" name="quantity" min="1" required />
           <input type="hidden" name="stock_name" value="AAPL" />
-          <div class="button-container"
+          <input type="hidden" name="price" value="{{ price }}" />
+          <div class="button-container">
             <button type="submit" name="action" value="buy">Buy</button>
             <button type="submit" name="action" value="sell">Sell</button>
           </div>
