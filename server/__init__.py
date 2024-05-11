@@ -40,6 +40,9 @@ def create_app():
 
     app.register_blueprint(sb)
 
+    from .admin import ad as admin_blueprint
+
+    app.register_blueprint(admin_blueprint)
     with app.app_context():
         db.create_all()
 

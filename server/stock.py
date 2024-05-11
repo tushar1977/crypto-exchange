@@ -36,7 +36,7 @@ def stock_post():
         action = request.form["action"]
         market_cap = 100000
         user = User.query.filter_by(id=current_user.id).first()
-
+        balance = user.total_balance
         with open("stock2.json", "r") as f:
             stock_data = json.load(f)
 
@@ -53,10 +53,14 @@ def stock_post():
 
         if action == "buy":
             sell_amt = old_price * stock_quantity
+            if balance < sell_amt:
+                flash("Not enought USDT")
             total_supply = market_cap * old_price
             percent_change = (sell_amt / total_supply) * 100
             new_price = old_price + ((percent_change * old_price) / 100)
-            total_balance = user.total_balance
+            balance -= sell_amt
+            print(balance)
+            db.session.commit()
             for item in stock_data:
                 if item["stock"] == stock_name:
                     item["price"] = str(new_price)
@@ -66,6 +70,9 @@ def stock_post():
             total_supply = market_cap * old_price
             percent_change = (sell_amt / total_supply) * 100
             new_price = old_price - ((percent_change * old_price) / 100)
+            balance += sell_amt
+            print(balance)
+            db.session.commit()
             for item in stock_data:
                 if item["stock"] == stock_name:
                     item["price"] = str(new_price)
@@ -74,11 +81,12 @@ def stock_post():
         with open("stock2.json", "w") as f:
             json.dump(stock_data, f, indent=2)
 
+        price = get_current_price(stock_name)
         new_stock = User_Stocks(
             user_id=current_user.id,
             stock=stock_name,
             quantity=stock_quantity,
-            price=old_price,
+            price=price,
             date=datetime.now(),
         )
         db.session.add(new_stock)
