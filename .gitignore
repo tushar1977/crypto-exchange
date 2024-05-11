@@ -2,5 +2,5 @@
 migrations/
 __pycache__/
 .env
-./stock2.json
+stock2.json
 
