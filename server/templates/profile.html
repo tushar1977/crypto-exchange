@@ -11,22 +11,14 @@
 </head>
 <body>
     <h1>User Stocks</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Stock</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in range(stocks|length) %}
-            <tr>
-                <td>{{ stocks[i] }}</td>
-                <td>{{ quantities[i] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
+<h1>User Profile</h1>
+    <p>Balance: {{ balance }}</p>
+    <h2>Stocks:</h2>
+    <ul>
+        {% for stock in user_stocks %}
+        <li>{{ stock.stock }} - Quantity: {{ stock.quantity }}</li>
+        {% endfor %}
+    </ul>
+    </body>
 </html>
 {% endblock %}{% endif %}
