@@ -43,6 +43,11 @@ def create_app():
     from .admin import ad as admin_blueprint
 
     app.register_blueprint(admin_blueprint)
+
+    from .mainnet import app_main
+
+    app.register_blueprint(app_main)
+
     with app.app_context():
         db.create_all()
 

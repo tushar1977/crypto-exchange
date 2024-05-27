@@ -1,4 +1,0 @@
-1) get price algo - done
-2) set up balance 
-3)show on frontend
-

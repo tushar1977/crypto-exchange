@@ -14,6 +14,7 @@ main = Blueprint("stock", __name__)
 stock_data_list = [
     {"stock": "BTC", "price": 69000, "market_cap": 100000},
     {"stock": "ETH", "price": 2900, "market_cap": 10000},
+    {"stock": "LUNA", "price": 55, "market_cap": 1000000000},
 ]
 
 
@@ -36,7 +37,7 @@ def get_current_price(stock_name):
 
         # elif not item["stock"] == stock_name:
         # with open("stock2.json", "w") as f:
-        # json.dump(stock_data_list, f)
+        # json.dump(stock_data_list, f
 
 
 def get_market_cap(stock_name):
@@ -59,7 +60,8 @@ def stock_post():
         global stock_name
 
         stock_name = request.form.get("stock_name")
-        stock_quantity = int(request.form.get("quantity"))
+        stock_quantity = float(request.form.get("quantity"))
+        stock_quantity = round(stock_quantity, 2)
         price_str = request.form.get("price")
         user = User.query.filter_by(id=current_user.id).first()
 
@@ -91,7 +93,7 @@ def stock_post():
             total_supply = market_cap * old_price
             percent_change = (sell_amt / total_supply) * 100
             new_price = round(old_price + ((percent_change * old_price) / 100), 2)
-            user.total_balance -= sell_amt
+            user.total_balance -= round(sell_amt, 3)
             db.session.commit()
             print(user.total_balance)
             for item in stock_data:
@@ -125,7 +127,7 @@ def stock_post():
             total_supply = market_cap * old_price
             percent_change = (sell_amt / total_supply) * 100
             new_price = round(old_price - ((percent_change * old_price) / 100), 2)
-            user.total_balance += sell_amt
+            user.total_balance += round(sell_amt, 3)
             db.session.commit()
 
             print(user.total_balance)
