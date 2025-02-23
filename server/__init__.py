@@ -1,10 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
+
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
-load_dotenv()
 
 db = SQLAlchemy()
 
@@ -47,8 +46,5 @@ def create_app():
     from .mainnet import app_main
 
     app.register_blueprint(app_main)
-
-    with app.app_context():
-        db.create_all()
 
     return app

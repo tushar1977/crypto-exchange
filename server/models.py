@@ -34,7 +34,7 @@ class User_Wallet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))  # Add this line
     account_add = db.Column(db.String(42))
-    account_memonic = db.Column(db.String(100))
+    account_private = db.Column(db.String(100))
 
     user = db.relationship(
         "User", backref=db.backref("User_Wallet_instance", uselist=False)
@@ -43,4 +43,4 @@ class User_Wallet(db.Model):
     def __init__(self, user_id, account_add, account_memonic):
         self.user_id = user_id
         self.account_add = account_add
-        self.account_memonic = account_memonic
+        self.account_private = account_memonic

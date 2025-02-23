@@ -1,0 +1,3 @@
+Buy, sell, check price of crypto in realtime
+View portfolio of your crypto
+View history of purchase and sale of crypto
